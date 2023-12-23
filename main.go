@@ -9,9 +9,9 @@ func main()  {
 	d := models.Digimon{}
 
 	d.Name = "agumon"
-	d.Level = "Child"
-	d.Species.Name = "Reptile"
-	d.Attribute.Name = "Vaccine"
+	d.Level = "child"
+	d.Species.Name = "reptile"
+	d.Attribute.Name = "vaccine"
 
-	fmt.Println(d)
+	fmt.Println(d.SpeciesName())
 }
