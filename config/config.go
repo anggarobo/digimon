@@ -11,7 +11,7 @@ import (
 )
 
 type Database struct {
-	User string
+	User     string
 	Host     string
 	Port     string
 	Password string
@@ -32,7 +32,7 @@ func (d Database) Connect() {
 	d.Port = os.Getenv("DB_PORT")
 	d.Password = os.Getenv("DB_PASSWORD")
 	d.Name = os.Getenv("DB_NAME")
-	
+
 	connection := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?charset=utf8&parseTime=True&loc=Local",
 		d.User,
 		d.Password,
