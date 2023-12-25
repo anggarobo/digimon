@@ -1,9 +1,15 @@
 package models
 
-type Family struct {
-	ID int64
-	Name string 
+import "time"
+
+type Families struct {
+	ID          int8
+	Name        string
+	Kanji       string
 	Description string
-	Dub string
-	Emblem string
+	Romaji      string
+	Dub         string
+	Level       int8
+	CreatedAt   time.Time
+	UpdatedAt   time.Time
 }

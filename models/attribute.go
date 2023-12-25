@@ -1,7 +1,14 @@
 package models
 
+import "time"
+
 type Attribute struct {
-	ID int64
-	Name string
-	Symbol string
+	ID          int8
+	Name        string
+	Symbol      string
+	Kanji       string
+	Description string
+	Romaji      string
+	CreatedAt   time.Time
+	UpdatedAt   time.Time
 }

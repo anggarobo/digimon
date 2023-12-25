@@ -1,17 +1,14 @@
 package main
 
 import (
-	"digimon/models"
+	"digimon/config"
 	"fmt"
 )
 
 func main()  {
-	d := models.Digimon{}
+	fmt.Println("Digimons")
+	
+	db := config.Database{}
 
-	d.Name = "agumon"
-	d.Level = "child"
-	d.Species.Name = "reptile"
-	d.Attribute.Name = "vaccine"
-
-	fmt.Println(d.SpeciesName())
+	db.Connect()
 }
