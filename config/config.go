@@ -1,13 +1,14 @@
 package config
 
 import (
+	"database/sql"
 	"fmt"
 	"log"
 	"os"
+	"time"
 
+	_ "github.com/go-sql-driver/mysql"
 	"github.com/joho/godotenv"
-	"gorm.io/driver/mysql"
-	"gorm.io/gorm"
 )
 
 type Database struct {
@@ -18,9 +19,9 @@ type Database struct {
 	Name     string
 }
 
-var DB *gorm.DB
+var SQL *sql.DB
 
-func (d Database) Connect() {
+func (d *Database) Connect() {
 	err := godotenv.Load()
 
 	if err != nil {
@@ -33,7 +34,7 @@ func (d Database) Connect() {
 	d.Password = os.Getenv("DB_PASSWORD")
 	d.Name = os.Getenv("DB_NAME")
 
-	connection := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?charset=utf8&parseTime=True&loc=Local",
+	dsn := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s",
 		d.User,
 		d.Password,
 		d.Host,
@@ -41,13 +42,16 @@ func (d Database) Connect() {
 		d.Name,
 	)
 
-	db, err := gorm.Open(mysql.Open(connection), &gorm.Config{})
+	db, err := sql.Open("mysql", dsn)
 
 	if err != nil {
-		panic(err.Error())
+		panic(err)
 	}
-
+	db.SetMaxIdleConns(10)
+	db.SetMaxOpenConns(10)
+	db.SetConnMaxIdleTime(time.Minute * 5)
+	db.SetConnMaxLifetime(time.Minute * 60)
 	fmt.Println("Connected to Mysql database!")
 
-	DB = db
+	SQL = db
 }

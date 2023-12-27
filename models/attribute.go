@@ -2,7 +2,7 @@ package models
 
 import "time"
 
-type Attribute struct {
+type Attributes struct {
 	ID          int8
 	Name        string
 	Symbol      string
