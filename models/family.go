@@ -9,7 +9,6 @@ type Families struct {
 	Description string
 	Romaji      string
 	Dub         string
-	Level       int8
 	CreatedAt   time.Time
 	UpdatedAt   time.Time
 }

@@ -5,13 +5,13 @@ import (
 	"fmt"
 	"net/http"
 
-	"digimon/config"
-	"digimon/models"
+	"digimons/config"
+	"digimons/models"
 )
 
 func GetLevels(w http.ResponseWriter, r *http.Request) {
 	sql := config.SQL
-	rows, err := sql.Query("SELECT * FROM levels")
+	rows, err := sql.Query("SELECT id, name, kanji, description, level FROM levels")
 
 	if err != nil {
 		fmt.Println(err)
@@ -23,15 +23,14 @@ func GetLevels(w http.ResponseWriter, r *http.Request) {
 
 	for rows.Next() {
 		var each = models.Levels{}
-		var err = rows.Scan(&each.ID, &each.Name, &each.Kanji, &each.Description, &each.Romaji, &each.Level, &each.Dub, &each.UpdatedAt, &each.CreatedAt)
+		var err = rows.Scan(&each.ID, &each.Name, &each.Kanji, &each.Description,&each.Level)
 
 		if err != nil {
-			fmt.Println(err.Error() + "error")
+			fmt.Println(err.Error())
 		}
 
 		l = append(l, each)
 	}
-	fmt.Println(l)
 
 	if err = rows.Err(); err != nil {
 		fmt.Println(err.Error())
