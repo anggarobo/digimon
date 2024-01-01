@@ -8,7 +8,7 @@ type Levels struct {
 	Kanji       string    `json:"kanji"`
 	Description string    `json:"description"`
 	Romaji      string    `json:"romaji,omitempty"`
-	Level       *uint8      `json:"level"`
+	Level       *uint8    `json:"level"`
 	Dub         string    `json:"dub,omitempty"`
 	UpdatedAt   time.Time `json:"updated_at"`
 	CreatedAt   time.Time `json:"created_at"`

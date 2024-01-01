@@ -16,9 +16,11 @@ func main() {
 	db := config.Database{}
 
 	db.Connect()
-	http.HandleFunc(api+"/levels", h.GetLevels)
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		w.Write([]byte("Digimon"))
 	})
+	http.HandleFunc(api+"/attributes", h.GetAttributes)
+	http.HandleFunc(api+"/families", h.GetFamilies)
+	http.HandleFunc(api+"/levels", h.GetLevels)
 	http.ListenAndServe(":9000", nil)
 }
